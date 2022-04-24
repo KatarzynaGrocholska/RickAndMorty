@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class InfoService {
     private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public int infoPages() {
         RickAndMorty rickAndMortyInfo = restTemplate

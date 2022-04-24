@@ -23,7 +23,6 @@ public class RickAndMortyController {
     private final InfoService infoService;
 
     @GetMapping(path = "/episode/{id}")
-    @ResponseBody
     public EpisodesDTO getResultById(@PathVariable("id") Integer id) {
         Integer idNumber = id >= 1 ? id : 1;
         return resultsService.getEpisodeById(idNumber);

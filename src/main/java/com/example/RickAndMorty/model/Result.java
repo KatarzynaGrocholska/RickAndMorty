@@ -9,7 +9,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown=true)
 @Getter
 @Setter
-
 public class Result {
     private Integer id;
     private String name;
