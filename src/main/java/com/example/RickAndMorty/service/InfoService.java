@@ -24,6 +24,13 @@ public class InfoService {
 
         return pages;
     }
+    public int infoCount() {
+        RickAndMorty rickAndMortyInfo = restTemplate
+                .getForObject("https://rickandmortyapi.com/api/episode/", RickAndMorty.class);
+        int count = rickAndMortyInfo.getInfo().getCount();
+
+        return count;
+    }
 
     public List<Result> getListOfAllEpisodes() {
         List<Result> rickyAndMortyEpisodesList = new ArrayList<>();
@@ -42,7 +49,7 @@ public class InfoService {
 
         while (episodeIterator.hasNext()) {
             String episodeNumber = episodeIterator.next().getEpisode();
-            int season = (int) episodeNumber.toCharArray()[2];
+            int season = Character.getNumericValue(episodeNumber.toCharArray()[2]);
             seasons.add(season);
         }
         return seasons;
@@ -58,7 +65,7 @@ public class InfoService {
         List<SeasonDTO> listOfSeasons = new ArrayList<>();
         for (Map.Entry<Integer, Long> entry : seasonMap.entrySet()) {
             SeasonDTO seasonDTO = SeasonDTO.builder()
-                    .id(entry.getKey() - 48)
+                    .id(entry.getKey())
                     .episodes(entry.getValue())
                     .build();
             listOfSeasons.add(seasonDTO);
