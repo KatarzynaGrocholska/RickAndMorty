@@ -1,6 +1,7 @@
 package com.example.RickAndMorty.controller;
 
 
+import com.example.RickAndMorty.model.EpisodesAndSeasonsDTO;
 import com.example.RickAndMorty.model.EpisodesDTO;
 import com.example.RickAndMorty.model.Result;
 import com.example.RickAndMorty.model.SeasonDTO;
@@ -29,7 +30,7 @@ public class RickAndMortyController {
     }
 
     @GetMapping(path = "/seasons_list")
-    public List<SeasonDTO> allSeasonsListwithEpisodes() {
+    public List<SeasonDTO> allSeasonsListWithEpisodesNumber() {
         return infoService.changeMapToSeasonDTO(allSeasons());
     }
 
@@ -52,4 +53,11 @@ public class RickAndMortyController {
     public List<Result> allEpisodes() {
         return infoService.getListOfAllEpisodes();
     }
+
+    @GetMapping(path = "/seasons_episodes")
+    public List<EpisodesAndSeasonsDTO> allSeasonsListWithEpisodesId() {
+        return infoService
+                .getSeasonNumberAndEpisodesId(allEpisodes());
+    }
+
 }

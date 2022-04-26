@@ -1,9 +1,9 @@
 package com.example.RickAndMorty.service;
 
+import com.example.RickAndMorty.model.EpisodesAndSeasonsDTO;
 import com.example.RickAndMorty.model.Result;
 import com.example.RickAndMorty.model.RickAndMorty;
 import com.example.RickAndMorty.model.SeasonDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +24,7 @@ public class InfoService {
 
         return pages;
     }
+
     public int infoCount() {
         RickAndMorty rickAndMortyInfo = restTemplate
                 .getForObject("https://rickandmortyapi.com/api/episode/", RickAndMorty.class);
@@ -71,5 +72,20 @@ public class InfoService {
             listOfSeasons.add(seasonDTO);
         }
         return listOfSeasons;
+    }
+
+    public List<EpisodesAndSeasonsDTO> getSeasonNumberAndEpisodesId(List<Result> rickyAndMortyEpisodesList) {
+        List<EpisodesAndSeasonsDTO> seasonsAndEpisodesList = new ArrayList<>();
+        for (int i = 0; i < rickyAndMortyEpisodesList.size(); i++) {
+            String episodeNumber = rickyAndMortyEpisodesList.get(i).getEpisode();
+            int season = Character.getNumericValue(episodeNumber.toCharArray()[2]);
+            int episode = rickyAndMortyEpisodesList.get(i).getId();
+            EpisodesAndSeasonsDTO episodesAndSeasonsDTO = EpisodesAndSeasonsDTO.builder()
+                    .episodeId(episode)
+                    .seasonNumber(season)
+                    .build();
+            seasonsAndEpisodesList.add(episodesAndSeasonsDTO);
+        }
+        return seasonsAndEpisodesList;
     }
 }
