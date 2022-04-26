@@ -23,41 +23,23 @@ public class RickAndMortyController {
     private final ResultsService resultsService;
     private final InfoService infoService;
 
-    @GetMapping(path = "/episode/{id}")
+    @GetMapping(path = "/episode/{id}")//odcinek wyciągany po id
     public EpisodesDTO getResultById(@PathVariable("id") Integer id) {
         Integer idNumber = id <= infoService.infoCount() ? id : infoService.infoCount();
         return resultsService.getEpisodeById(idNumber);
     }
 
-    @GetMapping(path = "/seasons_list")
+    @GetMapping(path = "/seasons_list") // lista sezonów i liczba odcinków w sezonie
     public List<SeasonDTO> allSeasonsListWithEpisodesNumber() {
-        return infoService.changeMapToSeasonDTO(allSeasons());
+        return infoService.changeMapToSeasonDTO
+                (infoService.countByStreamToMapEpisodes
+                        (infoService.getListOfseasonNumber
+                                (infoService.getListOfAllEpisodes())));
     }
 
-    @GetMapping(path = "/seasons_number")
-    public List<Integer> allSeasonsList() {
-        return infoService.getListOfseasonNumber(allEpisodes());
-    }
-
-    @GetMapping(path = "/seasons")
-    public Map<Integer, Long> allSeasons() {
-        return infoService.countByStreamToMapEpisodes(allSeasonsList());
-    }
-
-    @GetMapping(path = "/info")
-    public int info() {
-        return infoService.infoPages();
-    }
-
-    @GetMapping(path = "/all")
-    public List<Result> allEpisodes() {
-        return infoService.getListOfAllEpisodes();
-    }
-
-    @GetMapping(path = "/seasons_episodes")
+    @GetMapping(path = "/seasons_episodes")// id odcinka i numer sezonu
     public List<EpisodesAndSeasonsDTO> allSeasonsListWithEpisodesId() {
         return infoService
-                .getSeasonNumberAndEpisodesId(allEpisodes());
+                .getSeasonNumberAndEpisodesId(infoService.getListOfAllEpisodes());
     }
-
 }
