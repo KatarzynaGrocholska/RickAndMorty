@@ -14,6 +14,6 @@ import java.util.List;
 public class EpisodesDTO {
 
     private String name;
-    private String air_date;
+    private String air_date; //TODO why is this a String, if it is a date?
     private List<String> characters;
 }

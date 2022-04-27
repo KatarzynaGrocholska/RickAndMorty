@@ -14,6 +14,6 @@ import lombok.Setter;
 @Builder
 public class SeasonDTO {
 
-    private Integer id;
-    private Long episodes;
+    private Integer id; //TODO why not int?
+    private Long episodes; //TODO why Long and not long? would int not suffice?
 }

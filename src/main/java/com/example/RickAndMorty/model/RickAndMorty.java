@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RickAndMorty {
+public class RickAndMorty { //TODO class name is ambiguous - what does the class represent?
     private Info info;
     private List<Result> results;
 

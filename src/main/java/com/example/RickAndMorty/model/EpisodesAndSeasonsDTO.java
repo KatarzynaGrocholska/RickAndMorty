@@ -10,6 +10,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
 public class EpisodesAndSeasonsDTO {
-    private Integer seasonNumber;
-    private Integer episodeId;
+    //TODO can the seasonNumber of episodeId be <0?
+    private Integer seasonNumber; //TODO why is this an object?
+    private Integer episodeId; //TODO why is this an object?
 }

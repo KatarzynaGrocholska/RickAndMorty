@@ -14,11 +14,12 @@ public class ResultsService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public EpisodesDTO getEpisodeById(Integer id) {
-        if (id != null) {
+    public EpisodesDTO getEpisodeById(Integer id) { //TODO int instead of Integer
+        if (id != null) { // TODO if it was int, this would be unnecessary
             Result rickAndMortyEpisode = restTemplate
                     .getForObject("https://rickandmortyapi.com/api/episode/" + id, Result.class);
-
+            //FIXME rickAndMortyEpisode could be null, gotta check for that
+            //TODO unnecessary variable -> return EpisodesDTO.builder().....
             EpisodesDTO episodesDTO = EpisodesDTO.builder()
                     .air_date(rickAndMortyEpisode.getAir_date())
                     .characters(rickAndMortyEpisode.getCharacters())
